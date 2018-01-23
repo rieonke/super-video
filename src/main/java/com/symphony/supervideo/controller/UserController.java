@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +56,37 @@ public class UserController {
         list = userService.queryAllUsers();
         model.addAttribute("list",list);
         return "api/queryAllUser";
+    }
+    /**
+     * 启用禁用用户
+     * @zz
+     */
+    @RequestMapping (value = "/updateUserStatus",method = RequestMethod.GET)
+    public String updateUserStatus(int userId,String userStatus){
+        List<UserInfo> list = userService.queryAllUsers();
+        for (UserInfo user:list) {
+            if(user.getUserId() == userId){
+                user.setUserStatus(userStatus);
+                userService.iUserRepository.save(user);
+                return "redirect:queryAllUsers";
+            }
+        }
+        return "api/error";
+    }
+    /**
+     * 用户登录
+     * @zz
+     */
+    @RequestMapping (value = "/userLogin",method = RequestMethod.POST)
+    public String userLogin(HttpServletRequest request,HttpSession session, String userName, String userPass){
+        List<UserInfo> list = new ArrayList<UserInfo>();
+        list = userService.queryAllUsers();
+        for (UserInfo user:list) {
+            if(user.getUserName().equals(userName) && user.getUserPass().equals(userPass)){
+                session.setAttribute("user",user);
+                return "redirect:index";
+            }
+        }
+        return "redirect:index";
     }
 }
