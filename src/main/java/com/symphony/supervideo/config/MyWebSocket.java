@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -34,7 +35,7 @@ public class MyWebSocket {
         incrOnlineCount();
         for(MyWebSocket item : webSocketSet){
             if(!item.equals(this)) { //send to others only.
-                item.sendMessage("someone just joined in.");
+                item.sendMessage("有新用户加入到讨论中，欢迎");
             }
         }
         logger.info("new connection...current online count: {}", getOnlineCount());
@@ -45,7 +46,7 @@ public class MyWebSocket {
         webSocketSet.remove(this);
         decOnlineCount();
         for(MyWebSocket item : webSocketSet){
-            item.sendMessage("someone just closed a connection.");
+            item.sendMessage("有用户退出讨论");
         }
         logger.info("one connection closed...current online count: {}", getOnlineCount());
     }

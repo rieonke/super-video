@@ -39,6 +39,20 @@ public class VideoService {
     }
 
     /**
+     * 根据名称删除视频资源
+     * @author zz
+     */
+    public void deleteVideo(String videoName){
+        List<VideoInfo> list = new ArrayList<VideoInfo>();
+        list = iVideoRepository.findAll();
+        for (VideoInfo video:list) {
+            if(video.getVideoName().equals(videoName)){
+                iVideoRepository.delete(video);
+            }
+        }
+    }
+
+    /**
      * 计划任务,定时更新网站资源
      * @author zz
      */
