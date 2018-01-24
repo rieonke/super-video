@@ -19,9 +19,27 @@ public class UserService {
     @Autowired
     public IUserRepository iUserRepository;
 
+    /**
+     * 查询所有用户信息
+     * @zz
+     */
     public List<UserInfo> queryAllUsers(){
         List<UserInfo> list = new ArrayList<UserInfo>();
         list = iUserRepository.findAll();
         return list;
+    }
+
+    /**
+     * 根据用户ID删除用户
+     * @zz
+     */
+    public void deleteUserById(int userId){
+        List<UserInfo> list = new ArrayList<UserInfo>();
+        list = iUserRepository.findAll();
+        for (UserInfo user:list) {
+            if(user.getUserId() == userId){
+                iUserRepository.delete(user);
+            }
+        }
     }
 }

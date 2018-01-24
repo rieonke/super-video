@@ -9,10 +9,17 @@
     <script src="js/jquery.js"></script>
     <script src="/js/jquery-1.11.2.min.js"></script>
     <script src="/js/vue.min.js"></script>
+    <script>
+        $(function () {
+            $('#sum').click(function () {
+                location.href='updateVideoSum?vName=' + $('vName').innerText;
+            })
+        })
 
+    </script>
 </head>
 <body>
-    <h1  style="text-align:center;color: red;">网络视频爬虫系统主页面</h1>
+    <h1 id="sum"  style="text-align:center;color: red;">网络视频爬虫系统主页面</h1>
     <span>您好，尊敬的</span>
     <span id="user1" th:text="${session.user}?${session.user.userName}:null">${session.user.userName}</span>
     <div id="ws" style="position: fixed;margin-left: 1000px;margin-top: 0px;border: 1px solid blue;">
@@ -38,7 +45,7 @@
         <span>用户密码</span><input type="password" name="userPass" /><br/>
         <input type="submit" value="登录" />
     </form>
-
+    <button onclick="location.href='userRegisterMain';">注册</button>
 
     <div class="container">
         <table class="table-bordered">
@@ -46,7 +53,8 @@
                 <td>视频名称</td><td>更新时间</td><td>点击量</td><td>图片</td><td>评论</td><td>留言</td>
             </tr>
             <tr th:each="li:${list}">
-                <td><a th:href="${li.videoURL}" ><span th:text="${li.videoName}"></span></a></td>
+                <td><a th:href="'updateVideoSum?vName=' + ${li.videoName}" >
+                    <span id="vName" th:text="${li.videoName}">${li.videoName}</span></a></td>
                 <td><span th:text="${li.videoTime}"></span></td>
                 <td><span th:text="${li.videoSum}"></span></td>
                 <td><img th:src="${li.videoMsg}" /></td>
@@ -84,7 +92,7 @@
                 websocket = new WebSocket("ws://localhost:8080/my-websocket");
             }
             else {
-                alert('Sorry, websocket not supported by your browser.')
+                alert('websocket与浏览器不一致')
             }
 
             //Error callback

@@ -12,6 +12,7 @@
     <input type="submit"  value="确认"/>
 </form>
 <br/><a href="/queryAllUsers">查询所有用户</a>
+<br/><a href="/queryAllVideos">查询所有视频</a>
 <br/><a href="/index">返回主页面</a>
 </body>
 </html>

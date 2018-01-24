@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -82,11 +83,23 @@ public class UserController {
         List<UserInfo> list = new ArrayList<UserInfo>();
         list = userService.queryAllUsers();
         for (UserInfo user:list) {
-            if(user.getUserName().equals(userName) && user.getUserPass().equals(userPass)){
+            if(user.getUserName().equals(userName)
+                    && user.getUserPass().equals(userPass)
+                    && user.getUserStatus().equals("启用")){
                 session.setAttribute("user",user);
                 return "redirect:index";
             }
         }
         return "redirect:index";
     }
+    /**
+     * 注销用户操作
+     * @zz
+     */
+    @RequestMapping (value = "/deleteUserByName",method = RequestMethod.GET)
+    public String deleteUserByName(int userId){
+        userService.deleteUserById(userId);
+        return "redirect:queryAllUsers";
+    }
+
 }
