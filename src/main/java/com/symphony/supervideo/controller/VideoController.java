@@ -33,6 +33,7 @@ public class VideoController {
     @GetMapping(value = "/adminMain")
     public String adminMain(){
         return "api/adminMain";
+        
     }
     /**
      * 登录管理员主界面
