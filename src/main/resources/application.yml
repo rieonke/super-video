@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-        driver-class-name: oracle.jdbc.driver.OracleDriver
-        url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
-        username: scott
-        password: tiger
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=utf8
+    username: ygh
+    password: ygh
   jpa:
     hibernate:
        ddl-auto: create

@@ -1,0 +1,12 @@
+table tr{
+    height: 200px;
+}
+table td{
+    width: 200px;
+    text-align: center;
+    line-height: 200px;
+}
+table img{
+    width: 200px;
+    height: 200px;
+}

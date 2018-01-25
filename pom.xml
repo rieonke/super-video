@@ -40,10 +40,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!--oracle数据库配置-->
+		<!--&lt;!&ndash;oracle数据库配置&ndash;&gt;
 		<dependency>
 			<groupId>oracle</groupId>
 			<artifactId>ojdbc14-connector-java</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<!--JPA对象持久化标准-->
 		<dependency>
